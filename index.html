@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <title>Hangnam Style</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="icon" type="image/gif" href="assets/images/img_hangman.png" />
+
+
+</head>
+
+<div class="clockdate-wrapper">
+    <div id="clockdate">
+        <div id="clock"></div>
+        <div id="date"></div>
+    </div>
+</div>
+
+<body onload="startTime()">
+
+<!-- header Area -->
+    <div class="jumbotron jumbotron-fluid jumbo1">
+        <div class="container-fluid  jumbo1">
+            <h1 class="display-4  jumbo1">Hangnam Style!</h1>
+            <h3 class= "display-4 text-primary">Psy's Favorite Foods</h3>
+        </div>
+    </div>
+
+
+    <div class="container mt-2">
+        <div class="row">
+
+<!-- Left Column Start -->
+            <div class="col-md-5 bg-secondary border border-info m=4 p-4 h-100 d-inline-block">
+                <div class="row">
+                    <div class="col-md-12 text-white h4">What is it? ...
+                        <hr>
+                        <h2>You just typed <span id="demo0"><strong>...Nothing.</strong></span></h2>
+                        <p>random # between 1 and 9 (both included):  <span id="demo1"><strong>is null</strong></span></p>
+                        <p>random word from list:  <span id="demo2"><strong>is null</strong></span></p>
+
+
+                    </div>
+                </div>
+            </div>
+<!-- Left Column End -->
+
+<!-- Mid Column Start -->
+            <div class="col-md-1 bg-light"></div>
+<!-- Mid Column End -->
+
+<!-- Right Column Start -->
+            <div class="col-md-5 bg-secondary border border-info m=4 p-4 h-100 d-inline-block">
+                <div class="row">
+                    <div class="col-md-12 text-white h4">Press the Any key to Start!</div>
+                    <hr>
+                    <div class="col-md-12 text-white h4" id="game"></div>
+                </div>
+                <br>
+                <button type="button" onClick="location.href=location.href" class="btn btn-primary btn-sm">Reset</button>
+                <!-- <input type="button" value="Refresh Page" onClick="location.href=location.href" -->
+            </div>
+<!-- Right Column End -->
+
+        </div>
+    </div>
+
+
+    <footer class="footer fixed-bottom align-middle m-20 footercontainer">
+        <div class="container">
+            <span>Copyright &copy;</span>
+        </div>
+    </footer>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="assets/javascript/app.js"></script>
+
+
+</body>
+
+
+
+
+
+
+</html>
