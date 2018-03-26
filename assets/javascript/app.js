@@ -1,82 +1,194 @@
+(function() {
+    var myQuestions = [
+      {
+        question: "Where is Salzburg?",
+        answers: {
+          a: "Orlando, FL",
+          b: "Australia",
+          c: "Austria"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What is a Salzbury Steak?",
+        answers: {
+          a: "A wooden steak",
+          b: "A wooden steak in Salzbury",
+          c: "Actually, a Salisbury Steak"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "Sound of music was filmed in What city?",
+        answers: {
+          a: "Salisbury England",
+          b: "Paris, TX",
+          c: "Lot B, Universal",
+          d: "Salzburg, Austria"
+        },
+        correctAnswer: "d"
+      }
+    ];
+  
+    // Start count down
+    var audio = new Audio("assets/images/explosion.mp3");
+    var endtime = setTimeout(timeUp, 1000 * 17);
+    
+    function timeUp() {
+       $("#endTitle").html("<h1 id='endTitle2';><strong>Time's Up!</strong></h1>");
+        audio.play();
+        showResults();
+        }
+
+    function timeUp2() {
+        clearTimeout(endtime);
+        }
+
+    // Start count down
+    //<p>Seconds remaing to choose your answer:   <span id="countdowntimer">10 </span> Seconds</p>
+     var timeleft = 16;
+     var questionTimer = setInterval(function(){
+     timeleft--;
+     document.getElementById("countdowntimer").textContent = timeleft;
+     if(timeleft <= 0)
+          clearInterval(questionTimer);
+     },1000);
+
+    // End count down
 
 
-// List of Words only
-var wins = 0;
-var losses = 0;
-var ResetStartGuesses = 20;
-var CountOfMissedGuesses = 0;
-var RemainingGuesses = 20;
-var misses = 0;
-var validGuess = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-var wordLetterCount = 0;
-var WordAnswerDashes = [];
-
-var words = ["Kimchi","Bibimbap","Bulgogo","Japchae","Hoeddeok",
-                "Ddukbokkie","Samgyeopsal","Chimaek","Tteokbokki"]
-
-// List of Words 
-    var WordListDetl = {
-        "Kimchi":"Fermented Vegetable",
-        "Bibimbap":"Mixed Rice",
-        "Bulgogi":"Marinated Beef Barbecue",  
-        "Japchae":"Stir Fried Noodles",
-        "Hoeddeok":"Sweet Syrupy Pancakes",
-        "Ddukbokkie":"Spicy Rice Cake",
-        "Samgyeopsal":"Noodles and Pork",
-        "Chimaek":"Fried Chicken and Beer",
-        "Tteokbokki":"Nobody knows don't ask"
-      };
-
-
-// Determine which key was pressed, make it lowercase, and set it to the userInput variable.
-//       var userInput = String.fromCharCode(event.which).toLowerCase();
-
-// This function is run whenever the user presses the first key.
-    document.onkeyup = function(event) {
-
-    // Determines which key was pressed.
-        var userGuess = event.key;
-
-    // Generate random number limited by word array length
-        var randNum = Math.floor(Math.random() * words.length); // not with +1 like: var randNum = Math.floor(Math.random() * words.length) + 1;
-
-    // Use random number as item number in word array to select the actual word
-        var computerGuess = words[randNum];
-
-    // Set up the answer array
-    var WordAnswerDashes = [];
-    for (var i = 0; i < computerGuess.length; i++) {
-        WordAnswerDashes[i] = "_";
+    function triviaGame() {
+      // save the HTML output
+      var output = [];
+  
+      // for each question...
+      myQuestions.forEach((currentQuestion, questionNumber) => {   // => same as 
+        // save answer choices
+        var answers = [];
+  
+        // and for each available answer...
+        for (letter in currentQuestion.answers) {
+          // ...add an HTML radio button
+          answers.push(
+            `<label>
+               <input type="radio" name="question${questionNumber}" value="${letter}">
+                ${letter} :
+                ${currentQuestion.answers[letter]}
+             </label>`
+          );
+        }
+  
+        // add this question and its answers to the output
+        output.push(
+          `<div class="slide">
+             <div class="question"> ${currentQuestion.question} </div>
+             <div class="answers"> ${answers.join("")} </div>
+           </div>`
+        );
+      });
+  
+      // combine string HTML and put it on the page
+      quizContainer.innerHTML = output.join("");
     }
-    var LettersToGuess = computerGuess.length;
-
-        console.log(LettersToGuess);
-        console.log(WordAnswerDashes);
-
-    // send output to html id tags NOT PART OF FINAL VERSION!
-    document.getElementById("demo0").innerHTML = userGuess;
-    document.getElementById("demo1").innerHTML = randNum;
-    document.getElementById("demo2").innerHTML = computerGuess;
-
-    var html =
-    "<hr>" +
-    "<p>Wins: " + wins + "</p>" +
-    "<p>Losses: " + losses + "</p>" +
-    "<hr>" +
-    "<p>You chose: " + userGuess + "</p>" +
-    "<hr>" +
-    "<p>The computer chose: </p>" +
-    "<p>Take a guess >>: " + WordAnswerDashes + "</p>" +
-    "<hr>" +
-    "<p>misses: " + misses + "</p>";
   
-          // Set the inner HTML contents of the #game div to our html string
-          document.querySelector("#game").innerHTML = html;
+    /// Submit Button <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    function showResults() {   
+      // Stop the clock
+      clearInterval(questionTimer);
+      timeUp2();
 
-  
-};
+      // disable the buttons
+      //$("input[type=radio]").attr('disabled', true); // same as below
+      $("input:radio").attr('disabled', true);
+      //$(".second").attr('disabled', true);
 
+      // gather answer containers from our quiz
+      var answerContainers = quizContainer.querySelectorAll(".answers"); 
+        
+      // keep track of user's answers
+      let numCorrect = 0;
   
+      // for each question...
+      myQuestions.forEach((currentQuestion, questionNumber) => {
+        // find selected answer
+        var answerContainer = answerContainers[questionNumber];  
+        var selector = `input[name=question${questionNumber}]:checked`;  
+        var userAnswer = (answerContainer.querySelector(selector) || {}).value;   //**** */
+  
+        // if answer is correct
+        if (userAnswer === currentQuestion.correctAnswer) {
+          // add to the number of correct answers
+          numCorrect++;
+  
+          // color the answers green
+          answerContainers[questionNumber].style.color = "lightgreen";
+        } else {
+          // if answer is wrong or blank
+          // color the answers red
+          answerContainers[questionNumber].style.color = "red";
+        }
+      });
+  
+      // show number of correct answers out of total
+      resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+    }
+  
+    function showSlide(n) {
+      slides[currentSlide].classList.remove("active-slide");
+      slides[n].classList.add("active-slide");
+      currentSlide = n;
+      
+      if (currentSlide === 0) {
+        previousButton.style.display = "none";
+      } else {
+        previousButton.style.display = "inline-block";
+      }
+      
+      if (currentSlide === slides.length - 1) {
+        nextButton.style.display = "none";
+        submitButton.style.display = "inline-block";
+      } else {
+        nextButton.style.display = "inline-block";
+        submitButton.style.display = "none";
+      }
+    }
+  
+    function showNextSlide() {
+      showSlide(currentSlide + 1);
+    }
+  
+    function showPreviousSlide() {
+      showSlide(currentSlide - 1);
+    }
+  
+    var quizContainer = document.getElementById("quiz");   //**** */
+    var resultsContainer = document.getElementById("results");
+    var submitButton = document.getElementById("submit");
+  
+    // display first question
+    triviaGame();
+
+
+
+    var previousButton = document.getElementById("previous");
+    var nextButton = document.getElementById("next");
+    var slides = document.querySelectorAll(".slide");
+    currentSlide = 0; // let currentSlide = 0;
+  
+    showSlide(0);
+  
+    // on submit, show results
+    submitButton.addEventListener("click", showResults);
+    previousButton.addEventListener("click", showPreviousSlide);
+    nextButton.addEventListener("click", showNextSlide);
+
+
+
+})();
+
+
+
+
 // Start Clock Function
 
 function startTime() {

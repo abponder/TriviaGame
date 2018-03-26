@@ -4,14 +4,14 @@
 
 <head>
 
-    <title>Hangnam Style</title>
+    <title>Trivia Master</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="icon" type="image/gif" href="assets/images/img_hangman.png" />
+    <link rel="icon" type="image/gif" href="assets/images/img_question2.png" />
 
 
 </head>
@@ -27,9 +27,14 @@
 
 <!-- header Area -->
     <div class="jumbotron jumbotron-fluid jumbo1">
-        <div class="container-fluid  jumbo1">
-            <h1 class="display-4  jumbo1">Hangnam Style!</h1>
-            <h3 class= "display-4 text-primary">Psy's Favorite Foods</h3>
+        <div class="container-fluid ">
+            <h2 class="display-4 jumbo1">Trivia Master!</h2>
+            <img id="logo" src="assets/images/img_question.png">
+            <h2  id="logo"></h2>
+            <p id="p1">TRIVIA TRIVIA TRIVIA TRIVIA TRIVIA TRIVIA 
+                    TRIVIA TRIVIA TRIVIA</p>
+              <!-- class= "display-4 text-primary"-->      
+            
         </div>
     </div>
 
@@ -38,42 +43,34 @@
         <div class="row">
 
 <!-- Left Column Start -->
-            <div class="col-md-5 bg-secondary border border-info m=4 p-4 h-100 d-inline-block">
+            <div class="container-fluid bg-secondary border border-info m=4 p-4 h-100 d-inline-block">
+            <!-- <div class="col-md-10 bg-secondary border border-info m=4 p-4 h-100 d-inline-block">  -->
                 <div class="row">
-                    <div class="col-md-12 text-white h4">What is it? ...
+                    <div class="col-md-12 text-white h4">Choose your answer! ...
+                        <p>Seconds Remaining to Choose Answer:   <span id="countdowntimer">00</span></p>
                         <hr>
-                        <h2>You just typed <span id="demo0"><strong>...Nothing.</strong></span></h2>
-                        <p>random # between 1 and 9 (both included):  <span id="demo1"><strong>is null</strong></span></p>
-                        <p>random word from list:  <span id="demo2"><strong>is null</strong></span></p>
-
-
                     </div>
                 </div>
-            </div>
-<!-- Left Column End -->
-
-<!-- Mid Column Start -->
-            <div class="col-md-1 bg-light"></div>
-<!-- Mid Column End -->
-
-<!-- Right Column Start -->
-            <div class="col-md-5 bg-secondary border border-info m=4 p-4 h-100 d-inline-block">
-                <div class="row">
-                    <div class="col-md-12 text-white h4">Press the Any key to Start!</div>
-                    <hr>
-                    <div class="col-md-12 text-white h4" id="game"></div>
+                <div class="container-fluid">
+                <h1 id="endTitle">Was ist Salzburg?</h1>
+                <div class="quiz-container">
+                <div id="quiz"></div>
                 </div>
-                <br>
-                <button type="button" onClick="location.href=location.href" class="btn btn-primary btn-sm">Reset</button>
-                <!-- <input type="button" value="Refresh Page" onClick="location.href=location.href" -->
+                <button id="previous">Previous Question</button>
+                <button id="next">Next Question</button>
+                <button id="submit">Submit Answers</button>
+                <div id="results"></div>
+                </div>
+                <br><hr>
             </div>
-<!-- Right Column End -->
+
 
         </div>
     </div>
 
 
-    <footer class="footer fixed-bottom align-middle m-20 footercontainer">
+    <footer class="footer align-middle m-20 footercontainer">
+    <!-- <footer class="footer fixed-bottom align-middle m-20 footercontainer"> -->
         <div class="container">
             <span>Copyright &copy;</span>
         </div>
@@ -84,6 +81,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="assets/javascript/app.js"></script>
+
 
 
 </body>
